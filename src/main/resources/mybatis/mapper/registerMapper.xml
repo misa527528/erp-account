@@ -15,9 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="EMAIL" property="email"/>
 		<result column="TEL" property="tel"/>
 		<result column="STATUS" property="status"/>
-	</resultMap> 
+	</resultMap>
+	<sql id="base_register">
+		USERID,USERNAME,PASSWORD,MAJOR,CLASS,SID,EMAIL,TEL,STATUS
+	</sql>
 	<select id="findByUserId" parameterType="string" resultMap="RegisterResult">
-		select USERID,USERNAME,PASSWORD,MAJOR,CLASS,SID,EMAIL,TEL,STATUS from REGISTERUSER where USERID=#{userID}
+		select <include refid="base_register"/> from REGISTERUSER where USERID=#{userID}
 	</select>
 	
 	<insert id="addRegister" parameterType="cn.edu.cqupt.erp.erpaccount.entity.Register">
@@ -29,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="findAllRegister"  resultMap="RegisterResult">
-		select USERID,USERNAME,PASSWORD,MAJOR,CLASS,SID,EMAIL,TEL,STATUS from REGISTERUSER
+		select <include refid="base_register"/> from REGISTERUSER
 	</select>
 	
 	<delete id="deleteRegisterById" parameterType="map">
