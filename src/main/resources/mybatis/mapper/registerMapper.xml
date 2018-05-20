@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.edu.cqupt.erp.erpaccount.dao.RegisterDao">
+	<resultMap type="cn.edu.cqupt.erp.erpaccount.entity.Register" id="RegisterResult">
+		<id column="USERID" property="userID"/>  
+		<result column="USERNAME" property="name"/>  
+		<result column="PASSWORD" property="password"/>  
+		<result column="MAJOR" property="major"/>  
+		<result column="CLASS" property="className"/>
+		<result column="SID" property="studentID"/>
+		<result column="EMAIL" property="email"/>
+		<result column="TEL" property="tel"/>
+		<result column="STATUS" property="status"/>
+	</resultMap> 
+	<select id="findByUserId" parameterType="string" resultMap="RegisterResult">
+		select USERID,USERNAME,PASSWORD,MAJOR,CLASS,SID,EMAIL,TEL,STATUS from REGISTERUSER where USERID=#{userID}
+	</select>
+	
+	<insert id="addRegister" parameterType="cn.edu.cqupt.erp.erpaccount.entity.Register">
+		insert into REGISTERUSER(USERID,USERNAME,PASSWORD,MAJOR,CLASS,SID,EMAIL,TEL,STATUS) values(#{userID},#{name},#{password},#{major},#{className},#{studentID},#{email},#{tel},#{status})
+	</insert>
+	
+	<update id="updateRegister" parameterType="cn.edu.cqupt.erp.erpaccount.entity.Register">
+		update REGISTERUSER set USERNAME=#{name},PASSWORD=#{password},MAJOR=#{major},CLASS=#{className},SID=#{studentID},EMAIL=#{email},TEL=#{tel} where USERID=#{userID}
+	</update>
+	
+	<select id="findAllRegister"  resultMap="RegisterResult">
+		select USERID,USERNAME,PASSWORD,MAJOR,CLASS,SID,EMAIL,TEL,STATUS from REGISTERUSER
+	</select>
+	
+	<delete id="deleteRegisterById" parameterType="map">
+		delete from REGISTERUSER where USERID=#{id}
+	</delete>
+	
+</mapper>
