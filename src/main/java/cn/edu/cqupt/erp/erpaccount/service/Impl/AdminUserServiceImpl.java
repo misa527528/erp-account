@@ -22,4 +22,5 @@ public class AdminUserServiceImpl implements AdminUserService {
 		String result = JSON.toJSONString(adminUserManager.getAllAdmins());
 		return result;
 	}
+
 }
