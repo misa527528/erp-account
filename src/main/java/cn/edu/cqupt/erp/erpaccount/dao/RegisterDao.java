@@ -15,5 +15,4 @@ public interface RegisterDao {
 
     int deleteRegisterById(String registerId);
 
-    int  updateApprovedUser(Register register);
 }
