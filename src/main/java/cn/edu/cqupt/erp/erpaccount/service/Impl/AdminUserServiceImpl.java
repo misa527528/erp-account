@@ -23,7 +23,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 		return result;
 	}
 
-	public void test1() {
-		return;
+	public boolean test1() {
+		return false;
 	}
 }
