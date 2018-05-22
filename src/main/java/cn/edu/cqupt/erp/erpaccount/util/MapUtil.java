@@ -13,14 +13,14 @@ public class MapUtil {
 
     /**
      * 这是一个静态方法，抽象了生成Map的过程提高了代码的利用率
-     * @param status
+     * @param success
      * @param message
      * @param object
      * @return
      */
-    public static Map toMap(boolean status, String message, Object object){
+    public static Map toMap(boolean success, String message, Object object){
         Map map = new HashMap();
-        map.put("status",status);
+        map.put("success",success);
         map.put("message",message);
         map.put("object",object);
         return map;

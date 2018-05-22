@@ -1,7 +1,9 @@
 package cn.edu.cqupt.erp.erpaccount.service.Impl;
 
+import cn.edu.cqupt.erp.erpaccount.constant.UserOperateConstant;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
+import cn.edu.cqupt.erp.erpaccount.service.RegisterService;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,18 +14,20 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/register")
-public class RegisterServiceImpl {
+public class RegisterServiceImpl implements RegisterService, UserOperateConstant{
 
     @Resource
     private RegisterManager registerManager;
 
+    @Override
     @RequestMapping("/addRegister")
     public String addRegister(Register register){
         Map map;
-        if (registerManager.addRegister(register)){
-            map = MapUtil.toMap(true,"add_success",null);
+        boolean bool = registerManager.addRegister(register);
+        if (bool){
+            map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
         }else {
-            map = MapUtil.toMap(false,"add_fail",null);
+            map = MapUtil.toMap(false,UserOperateConstant.REGISTER_FAIL_FLAG,null);
         }
         String result = JSON.toJSONString(map);
         return result;
