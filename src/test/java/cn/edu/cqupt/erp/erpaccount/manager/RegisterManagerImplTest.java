@@ -27,7 +27,6 @@ public class RegisterManagerImplTest {
     private RegisterManager registerManager = new RegisterManagerImpl();
 
     private Register register;
-    private List list;
 
     @Before
     public void setUp(){
@@ -39,7 +38,6 @@ public class RegisterManagerImplTest {
         register.setName("chenmeiling");
         register.setStudentID("2016211036");
         register.setPassword("123456");
-        list = new LinkedList();
     }
 
     @Test
@@ -58,6 +56,7 @@ public class RegisterManagerImplTest {
 
     @Test
     public void findAllRegister(){
+        List<Register> list = new LinkedList<>();
         doReturn(list).when(registerDao).findAllRegister();
         List<Register> register = registerManager.findAllRegister();
         Assert.assertEquals(list, register);

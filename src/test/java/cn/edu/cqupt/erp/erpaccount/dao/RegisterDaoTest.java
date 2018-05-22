@@ -26,7 +26,7 @@ public class RegisterDaoTest {
         register.setClassName("03011603");
 
         int rows = registerDao.addRegister(register);
-        org.junit.Assert.assertEquals(1,rows);
+        Assert.assertTrue(1 == rows);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class RegisterDaoTest {
         Register register ;
         register = registerDao.findByUserId("Zane");
         String name = register.getName();
-        org.junit.Assert.assertTrue(name.equals("徐志"));
+        Assert.assertTrue(name.equals("徐志"));
     }
 
     @Test
@@ -45,13 +45,13 @@ public class RegisterDaoTest {
         register.setClassName("012345");
 
         int result = registerDao.updateRegister(register);
-        Assert.assertEquals(1,result);
+        Assert.assertTrue(1 == result);
     }
 
     @Test
     public void deleteRegisterById(){
         int rows = registerDao.deleteRegisterById("2016211036");
-        Assert.assertEquals(1,rows);
+        Assert.assertTrue(1 == rows);
     }
 
     @Test
