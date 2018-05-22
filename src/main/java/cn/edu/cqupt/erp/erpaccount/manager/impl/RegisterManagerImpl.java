@@ -16,11 +16,7 @@ public class RegisterManagerImpl implements RegisterManager {
     @Override
     public boolean addRegister(Register register) {
         int result = registerDao.addRegister(register);
-        if (result == 1){
-            return true;
-        }else {
-            return false;
-        }
+        return result == 1;
     }
 
     @Override

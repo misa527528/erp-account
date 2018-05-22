@@ -16,6 +16,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,14 +44,14 @@ public class RegisterManagerImplTest {
 
     @Test
     public void addRegister(){
-        doReturn(1).when(registerDao).addRegister(register);
+        doReturn(1).when(registerDao).addRegister(anyObject());
         Boolean res = registerManager.addRegister(register);
         Assert.assertTrue(res);
     }
 
     @Test
     public void findRegisterByUserId(){
-        doReturn(register).when(registerDao).findByUserId("2016211036");
+        doReturn(register).when(registerDao).findByUserId(anyString());
         Register register = registerManager.findRegisterByUserId("2016211036");
         Assert.assertEquals("chenmeiling",register.getName());
     }
