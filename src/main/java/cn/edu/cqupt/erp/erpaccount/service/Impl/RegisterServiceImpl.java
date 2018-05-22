@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/register")
-public class RegisterServiceImpl implements RegisterService, UserOperateConstant{
+public class RegisterServiceImpl implements RegisterService{
 
     @Resource
     private RegisterManager registerManager;
