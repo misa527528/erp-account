@@ -4,4 +4,6 @@ public interface UserOperateConstant {
     String SUCCESS_FLAG = "success";
     String REGISTER_FAIL_FLAG = "register_fail";
     String FIND_FAIL_FLAG = "find_fail";
+
+    String REGISTER_STATUS = "等待审批";
 }
