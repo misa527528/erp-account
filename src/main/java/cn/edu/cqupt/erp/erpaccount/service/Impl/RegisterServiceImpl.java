@@ -22,9 +22,9 @@ public class RegisterServiceImpl implements RegisterService{
     @Override
     @RequestMapping("/addRegister")
     public String addRegister(Register register){
-        Map map;
         register.setStatus("等待审批");
         boolean bool = registerManager.addRegister(register);
+        Map map;
         if (bool){
             map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
         }else {
