@@ -7,6 +7,7 @@ import cn.edu.cqupt.erp.erpaccount.service.UserManagerService;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ public class UserManagerSeviceImpl implements UserManagerService {
     private RegisterManager registerManager;
 
     @Override
-    @RequestMapping("/findAllRegister")
+    @RequestMapping(value = "/findAllRegister",method = RequestMethod.GET)
     public String findAllRegister() {
         List<Register> registers = registerManager.findAllRegister();
         Map map;
