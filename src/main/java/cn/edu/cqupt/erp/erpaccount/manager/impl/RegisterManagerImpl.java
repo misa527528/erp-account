@@ -1,5 +1,6 @@
 package cn.edu.cqupt.erp.erpaccount.manager.impl;
 
+import cn.edu.cqupt.erp.erpaccount.dao.ApproveduserDao;
 import cn.edu.cqupt.erp.erpaccount.dao.RegisterDao;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
@@ -13,10 +14,22 @@ public class RegisterManagerImpl implements RegisterManager {
     @Resource
     private RegisterDao registerDao;
 
+    @Resource
+    private ApproveduserDao approveduserDao;
+
     @Override
     public boolean addRegister(Register register) {
-        int result = registerDao.addRegister(register);
-        return result == 1;
+        // 1.查register表是否存在
+        if (registerDao.findRegisterByUserId(register.getUserID()) == null){
+            // 2.查approvedUser表是否存在
+            if (approveduserDao.findApproveduserById(register.getUserID()) == null){
+                int result = registerDao.addRegister(register);
+                return result == 1;
+            }
+            return false;
+        }
+        return false;
+
     }
 
     @Override
@@ -26,7 +39,7 @@ public class RegisterManagerImpl implements RegisterManager {
 
     @Override
     public Register findRegisterByUserId(String registerId) {
-        return registerDao.findByUserId(registerId);
+        return registerDao.findRegisterByUserId(registerId);
     }
 
     @Override

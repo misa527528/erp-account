@@ -9,7 +9,7 @@ public interface RegisterDao {
 
     int  updateRegister(Register register);
 
-    Register findByUserId(String registerId);
+    Register findRegisterByUserId(String registerId);
 
     List<Register> findAllRegister();
 

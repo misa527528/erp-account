@@ -6,6 +6,7 @@ import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
 import cn.edu.cqupt.erp.erpaccount.service.RegisterService;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
 import com.alibaba.fastjson.JSON;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class RegisterServiceImpl implements RegisterService{
 
     @Override
     @RequestMapping(value = "/addRegister", method = RequestMethod.POST)
-    public String addRegister(Register register){
+    public String addRegister(@RequestBody Register register){
         register.setStatus(UserOperateConstant.REGISTER_STATUS);
         boolean bool = registerManager.addRegister(register);
         Map map;
