@@ -28,7 +28,7 @@ public class UserManagerSeviceImpl implements UserManagerService {
         if (!registers.isEmpty()){
             map = MapUtil.toMap(true, UserOperateConstant.SUCCESS_FLAG,registers);
         } else {
-            map = MapUtil.toMap(false,UserOperateConstant.FIND_FAIL_FLAG,null);
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
         }
         String result = JSON.toJSONString(map);
         return result;

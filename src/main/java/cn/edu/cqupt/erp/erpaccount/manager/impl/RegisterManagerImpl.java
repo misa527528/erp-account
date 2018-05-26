@@ -2,6 +2,7 @@ package cn.edu.cqupt.erp.erpaccount.manager.impl;
 
 import cn.edu.cqupt.erp.erpaccount.dao.ApproveduserDao;
 import cn.edu.cqupt.erp.erpaccount.dao.RegisterDao;
+import cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
 import org.springframework.stereotype.Component;
@@ -19,17 +20,16 @@ public class RegisterManagerImpl implements RegisterManager {
 
     @Override
     public boolean addRegister(Register register) {
-        // 1.查register表是否存在
-        if (registerDao.findRegisterByUserId(register.getUserID()) == null){
-            // 2.查approvedUser表是否存在
-            if (approveduserDao.findApproveduserById(register.getUserID()) == null){
-                int result = registerDao.addRegister(register);
-                return result == 1;
-            }
+        Register register1 = registerDao.findRegisterByUserId(register.getUserID());
+        if (register1 != null) {
             return false;
         }
-        return false;
-
+        ApprovedUser approvedUser = approveduserDao.findApproveduserById(register.getUserID());
+        if (approvedUser != null){
+            return false;
+        }
+        int result = registerDao.addRegister(register);
+        return result == 1;
     }
 
     @Override

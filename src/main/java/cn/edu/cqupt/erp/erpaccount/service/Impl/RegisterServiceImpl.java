@@ -24,13 +24,16 @@ public class RegisterServiceImpl implements RegisterService{
     @Override
     @RequestMapping(value = "/addRegister", method = RequestMethod.POST)
     public String addRegister(@RequestBody Register register){
+        if (register.getUserID() == null || register.getName() == null || register.getPassword() == null || register.getStudentID() == null){
+            return UserOperateConstant.FAIL_FLAG;
+        }
         register.setStatus(UserOperateConstant.REGISTER_STATUS);
         boolean bool = registerManager.addRegister(register);
         Map map;
         if (bool){
             map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
         }else {
-            map = MapUtil.toMap(false,UserOperateConstant.REGISTER_FAIL_FLAG,null);
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
         }
         String result = JSON.toJSONString(map);
         return result;
