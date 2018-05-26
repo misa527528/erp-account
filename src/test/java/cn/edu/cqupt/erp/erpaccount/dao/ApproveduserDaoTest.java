@@ -20,4 +20,15 @@ public class ApproveduserDaoTest {
         String name = approvedUser.getName();
         Assert.assertTrue(name.equals("王永"));
     }
+
+    @Test
+    public void updateApproveduser(){
+        ApprovedUser approvedUser = new ApprovedUser();
+        approvedUser.setUserID("0101311");
+        approvedUser.setClassName("2");
+        approvedUser.setMajor("工商");
+
+        int result = approveduserDao.updateApproveduser(approvedUser);
+        Assert.assertTrue(1 == result);
+    }
 }

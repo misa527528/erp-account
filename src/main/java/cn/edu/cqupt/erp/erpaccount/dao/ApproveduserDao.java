@@ -5,5 +5,5 @@ import cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser;
 public interface ApproveduserDao {
 	ApprovedUser findApproveduserById(String userId);
 
-
+	int updateApproveduser(ApprovedUser approvedUser);
 }
