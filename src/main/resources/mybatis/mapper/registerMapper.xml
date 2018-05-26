@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="base_register">
 		USERID,USERNAME,PASSWORD,MAJOR,CLASS,SID,EMAIL,TEL,STATUS
 	</sql>
-	<select id="findByUserId" parameterType="string" resultMap="RegisterResult">
+	<select id="findRegisterByUserId" parameterType="string" resultMap="RegisterResult">
 		select <include refid="base_register"/> from REGISTERUSER where USERID=#{userID}
 	</select>
 	

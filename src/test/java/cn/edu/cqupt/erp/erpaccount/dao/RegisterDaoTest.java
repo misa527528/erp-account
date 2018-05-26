@@ -30,9 +30,9 @@ public class RegisterDaoTest {
     }
 
     @Test
-    public void findByUserId(){
+    public void findRegisterByUserId(){
         Register register ;
-        register = registerDao.findByUserId("Zane");
+        register = registerDao.findRegisterByUserId("Zane");
         String name = register.getName();
         Assert.assertTrue(name.equals("徐志"));
     }
