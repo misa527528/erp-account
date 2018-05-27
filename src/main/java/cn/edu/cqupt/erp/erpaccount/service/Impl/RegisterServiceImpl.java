@@ -6,6 +6,7 @@ import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
 import cn.edu.cqupt.erp.erpaccount.service.RegisterService;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +25,7 @@ public class RegisterServiceImpl implements RegisterService{
     @Override
     @RequestMapping(value = "/addRegister", method = RequestMethod.POST)
     public String addRegister(@RequestBody Register register){
-        if (register.getUserID() == null || register.getName() == null || register.getPassword() == null || register.getStudentID() == null){
+        if (!StringUtils.isNotBlank(register.getUserID()) || !StringUtils.isNotBlank(register.getName()) || !StringUtils.isNotBlank(register.getPassword()) || !StringUtils.isNotBlank(register.getStudentID())){
             return UserOperateConstant.FAIL_FLAG;
         }
         register.setStatus(UserOperateConstant.REGISTER_STATUS);
