@@ -31,7 +31,7 @@ public class RegisterDaoTest {
 
     @Test
     public void findRegisterByUserId(){
-        Register register = registerDao.findRegisterByUserId("123");
+        Register register = registerDao.findRegisterByUserId("Zane");
         String name = register.getName();
         Assert.assertEquals("徐志", name);
     }
