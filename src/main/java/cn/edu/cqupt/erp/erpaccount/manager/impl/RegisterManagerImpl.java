@@ -34,7 +34,12 @@ public class RegisterManagerImpl implements RegisterManager {
 
     @Override
     public boolean updateRegister(Register register) {
-        return false;
+        Register register1 = registerDao.findRegisterByUserId(register.getUserID());
+        if (register1 == null){
+            return false;
+        }
+        int result = registerDao.updateRegister(register);
+        return result == 1;
     }
 
     @Override
