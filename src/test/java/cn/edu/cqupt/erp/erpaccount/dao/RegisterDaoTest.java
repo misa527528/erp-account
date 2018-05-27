@@ -34,14 +34,13 @@ public class RegisterDaoTest {
         Register register ;
         register = registerDao.findRegisterByUserId("Zane");
         String name = register.getName();
-        Assert.assertTrue(name.equals("徐志"));
+        Assert.assertEquals("徐志", name);
     }
 
     @Test
     public void updateRegister(){
         Register register = new Register();
-        register.setUserID("张梦龙");
-        register.setName("lalala");
+        register.setUserID("Zane");
         register.setClassName("012345");
 
         int result = registerDao.updateRegister(register);

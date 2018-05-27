@@ -25,7 +25,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
  	<update id="updateApproveduser" parameterType="cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser">
-		update APPROVEDUSER  set USERNAME=#{name},PASSWORD=#{password},MAJOR=#{major},CLASS=#{className},SID=#{studentID},EMAIL=#{email},TEL=#{tel} where USERID=#{userID}
+		update APPROVEDUSER
+        <set>
+            <if test="name != null"> USERNAME=#{name}, </if>
+            <if test="password != null"> PASSWORD=#{password}, </if>
+            <if test="major != null"> MAJOR=#{major}, </if>
+            <if test="className != null"> CLASS=#{className}, </if>
+            <if test="studentID != null"> SID=#{studentID}, </if>
+            <if test="email != null"> EMAIL=#{email}, </if>
+            <if test="tel != null"> TEL=#{tel} </if>
+        </set>
+        where USERID=#{userID}
 	</update>
 
 	<insert id="addApproveduser" parameterType="cn.edu.cqupt.erp.erpaccount.entity.Register">

@@ -18,7 +18,7 @@ public class ApproveduserDaoTest {
     public void findApproveduserById(){
         ApprovedUser approvedUser = approveduserDao.findApproveduserById("0101311");
         String name = approvedUser.getName();
-        Assert.assertTrue(name.equals("王永"));
+        Assert.assertEquals("王永",name);
     }
 
     @Test
