@@ -1,5 +1,6 @@
 package cn.edu.cqupt.erp.erpaccount.manager;
 
+import cn.edu.cqupt.erp.erpaccount.dao.ApproveduserDao;
 import cn.edu.cqupt.erp.erpaccount.dao.RegisterDao;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import cn.edu.cqupt.erp.erpaccount.manager.impl.RegisterManagerImpl;
@@ -24,6 +25,8 @@ import static org.mockito.Mockito.doReturn;
 public class RegisterManagerImplTest {
     @Mock
     private RegisterDao registerDao;
+    @Mock
+    private ApproveduserDao approveduserDao;
 
     @InjectMocks
     private RegisterManager registerManager = new RegisterManagerImpl();
@@ -35,11 +38,11 @@ public class RegisterManagerImplTest {
         MockitoAnnotations.initMocks(this);
 
         register = new Register();
-        register.setUserID("2016211036");
+        register.setUserID("1234");
         register.setClassName("123456");
         register.setName("chenmeiling");
-        register.setStudentID("2016211036");
-        register.setPassword("123456");
+        register.setStudentID("1234");
+        register.setPassword("1234");
     }
 
     @Test
@@ -51,7 +54,7 @@ public class RegisterManagerImplTest {
 
     @Test
     public void findRegisterByUserId(){
-        doReturn(register).when(registerDao).findByUserId(anyString());
+        doReturn(register).when(registerDao).findRegisterByUserId(anyString());
         Register register = registerManager.findRegisterByUserId("2016211036");
         Assert.assertEquals("chenmeiling",register.getName());
     }
