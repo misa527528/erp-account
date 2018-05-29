@@ -55,7 +55,7 @@ public class RegisterManagerImplTest {
     @Test
     public void findRegisterByUserId(){
         doReturn(register).when(registerDao).findRegisterByUserId(anyString());
-        Register register = registerManager.findRegisterByUserId("2016211036");
+        Register register = registerManager.findRegisterByUserId("1234");
         Assert.assertEquals("chenmeiling",register.getName());
     }
 
@@ -65,6 +65,15 @@ public class RegisterManagerImplTest {
         doReturn(list).when(registerDao).findAllRegister();
         List<Register> register = registerManager.findAllRegister();
         Assert.assertEquals(list, register);
+    }
+
+    @Test
+    public void updateRegister(){
+        doReturn(1).when(registerDao).updateRegister(anyObject());
+        register.setMajor("xinguan");
+        register.setEmail("123");
+        Boolean bool = registerManager.updateRegister(register);
+        Assert.assertTrue(bool);
     }
 
 }
