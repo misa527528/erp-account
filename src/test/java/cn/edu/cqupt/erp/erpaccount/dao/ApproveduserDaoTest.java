@@ -1,6 +1,7 @@
 package cn.edu.cqupt.erp.erpaccount.dao;
 
 import cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser;
+import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,12 +24,12 @@ public class ApproveduserDaoTest {
 
     @Test
     public void updateApproveduser(){
-        ApprovedUser approvedUser = new ApprovedUser();
-        approvedUser.setUserID("0101311");
-        approvedUser.setClassName("2");
-        approvedUser.setMajor("工商");
+        Register register = new Register();
+        register.setUserID("0101311");
+        register.setClassName("2");
+        register.setMajor("工商");
 
-        int result = approveduserDao.updateApproveduser(approvedUser);
+        int result = approveduserDao.updateApproveduser(register);
         Assert.assertTrue(1 == result);
     }
 }
