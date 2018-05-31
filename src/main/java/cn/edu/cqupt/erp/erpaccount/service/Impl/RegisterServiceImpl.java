@@ -33,9 +33,9 @@ public class RegisterServiceImpl implements RegisterService{
             return UserOperateConstant.FAIL_FLAG;
         }
         register.setStatus(UserOperateConstant.REGISTER_STATUS);
-        boolean bool = registerManager.addRegister(register);
+        boolean addSuccess = registerManager.addRegister(register);
         Map map;
-        if (bool){
+        if (addSuccess){
             map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
         }else {
             map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
