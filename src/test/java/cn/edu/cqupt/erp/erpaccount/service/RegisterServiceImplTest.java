@@ -1,6 +1,7 @@
 package cn.edu.cqupt.erp.erpaccount.service;
 
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
+import cn.edu.cqupt.erp.erpaccount.manager.ApprovedUserManager;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
 import cn.edu.cqupt.erp.erpaccount.service.Impl.RegisterServiceImpl;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
@@ -23,6 +24,8 @@ import static org.mockito.Mockito.doReturn;
 public class RegisterServiceImplTest {
     @Mock
     private RegisterManager registerManager;
+    @Mock
+    private ApprovedUserManager approvedUserManager;
 
     @InjectMocks
     private RegisterService registerService = new RegisterServiceImpl();
