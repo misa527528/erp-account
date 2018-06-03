@@ -8,6 +8,7 @@ import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Component
 public class ApprovedUserManagerImpl implements ApprovedUserManager {
@@ -40,5 +41,10 @@ public class ApprovedUserManagerImpl implements ApprovedUserManager {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<ApprovedUser> findAllApproveduser() {
+        return approveduserDao.findAllApproveduser();
     }
 }

@@ -1,6 +1,7 @@
 package cn.edu.cqupt.erp.erpaccount.service.Impl;
 
 import cn.edu.cqupt.erp.erpaccount.constant.UserOperateConstant;
+import cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import cn.edu.cqupt.erp.erpaccount.manager.ApprovedUserManager;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
@@ -42,6 +43,20 @@ public class UserManagerSeviceImpl implements UserManagerService {
         Map map;
         if (passSuccess){
             map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
+        } else {
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+        }
+        String result = JSON.toJSONString(map);
+        return result;
+    }
+
+    @Override
+    @RequestMapping(value = "/findAllApproveduser", method = RequestMethod.GET)
+    public String findAllApproveduser() {
+        List<ApprovedUser> approvedUsers = approvedUserManager.findAllApproveduser();
+        Map map;
+        if (!approvedUsers.isEmpty()){
+            map = MapUtil.toMap(true, UserOperateConstant.SUCCESS_FLAG,approvedUsers);
         } else {
             map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
         }
