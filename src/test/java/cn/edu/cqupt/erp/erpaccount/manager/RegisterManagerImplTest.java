@@ -76,4 +76,11 @@ public class RegisterManagerImplTest {
         Assert.assertTrue(bool);
     }
 
+    @Test
+    public void deleteRegisterById(){
+        doReturn(1).when(registerDao).deleteRegisterById(anyString());
+        Boolean deleteSuccess = registerManager.deleteRegisterById("1234");
+        Assert.assertTrue(deleteSuccess);
+    }
+
 }

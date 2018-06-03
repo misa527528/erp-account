@@ -32,4 +32,16 @@ public class ApproveduserDaoTest {
         int result = approveduserDao.updateApproveduser(register);
         Assert.assertTrue(1 == result);
     }
+
+    @Test
+    public void addApproveduser(){
+        Register register = new Register();
+        register.setUserID("123");
+        register.setName("hello");
+        register.setPassword("111");
+        register.setStudentID("123");
+
+        int result = approveduserDao.addApproveduser(register);
+        Assert.assertTrue(1 == result);
+    }
 }

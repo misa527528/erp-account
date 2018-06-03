@@ -6,4 +6,6 @@ public interface UserManagerService {
      * @return
      */
     String findAllRegister();
+
+    String passRegisterUser(String registerId);
 }

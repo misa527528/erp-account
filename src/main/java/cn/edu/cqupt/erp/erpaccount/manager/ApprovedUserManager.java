@@ -7,4 +7,6 @@ public interface ApprovedUserManager {
     boolean updateApproveduser(Register register);
 
     ApprovedUser findApproveduserById(String approveduserId);
+
+    boolean insertApprovedUser(String registerId);
 }
