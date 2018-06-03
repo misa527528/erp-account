@@ -50,6 +50,7 @@ public class RegisterManagerImpl implements RegisterManager {
 
     @Override
     public boolean deleteRegisterById(String registerId) {
-        return false;
+        int result = registerDao.deleteRegisterById(registerId);
+        return result == 1;
     }
 }

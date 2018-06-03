@@ -60,5 +60,4 @@ public class ApprovedUserManagerImplTest {
         ApprovedUser approvedUser = approvedUserManager.findApproveduserById("111");
         Assert.assertEquals("hello",approvedUser.getName());
     }
-
 }
