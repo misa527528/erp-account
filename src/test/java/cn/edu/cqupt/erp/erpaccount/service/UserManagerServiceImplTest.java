@@ -1,7 +1,9 @@
 package cn.edu.cqupt.erp.erpaccount.service;
 
 import cn.edu.cqupt.erp.erpaccount.constant.UserOperateConstant;
+import cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
+import cn.edu.cqupt.erp.erpaccount.manager.ApprovedUserManager;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
 import cn.edu.cqupt.erp.erpaccount.service.Impl.UserManagerSeviceImpl;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
@@ -25,12 +27,15 @@ import static org.mockito.Mockito.doReturn;
 public class UserManagerServiceImplTest {
     @Mock
     private RegisterManager registerManager;
+    @Mock
+    private ApprovedUserManager approvedUserManager;
 
 
     @InjectMocks
     private UserManagerService userManagerService = new UserManagerSeviceImpl();
 
     private Register register;
+    private ApprovedUser approvedUser;
 
     @Before
     public void setUp() {
@@ -41,6 +46,12 @@ public class UserManagerServiceImplTest {
         register.setName("lalala");
         register.setStudentID("123");
         register.setPassword("123");
+
+        approvedUser = new ApprovedUser();
+        approvedUser.setUserID("111");
+        approvedUser.setPassword("123");
+        approvedUser.setStudentID("111");
+        approvedUser.setName("hello");
     }
 
     @Test
@@ -50,6 +61,17 @@ public class UserManagerServiceImplTest {
         doReturn(list).when(registerManager).findAllRegister();
         String result = userManagerService.findAllRegister();
         Map map = MapUtil.toMap(true, UserOperateConstant.SUCCESS_FLAG,list);
+        String mapStr = JSON.toJSONString(map);
+        Assert.assertEquals(mapStr,result);
+    }
+
+    @Test
+    public void findAllApproveduser(){
+        List<ApprovedUser> list = new LinkedList<>();
+        list.add(approvedUser);
+        doReturn(list).when(approvedUserManager).findAllApproveduser();
+        String result = userManagerService.findAllApproveduser();
+        Map map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,list);
         String mapStr = JSON.toJSONString(map);
         Assert.assertEquals(mapStr,result);
     }
