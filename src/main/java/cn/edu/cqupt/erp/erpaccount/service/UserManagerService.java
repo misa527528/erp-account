@@ -8,4 +8,6 @@ public interface UserManagerService {
     String findAllRegister();
 
     String passRegisterUser(String registerId);
+
+    String findAllApproveduser();
 }

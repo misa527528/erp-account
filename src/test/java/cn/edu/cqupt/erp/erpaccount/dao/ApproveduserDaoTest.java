@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApproveduserDaoTest {
@@ -43,5 +45,11 @@ public class ApproveduserDaoTest {
 
         int result = approveduserDao.addApproveduser(register);
         Assert.assertTrue(1 == result);
+    }
+
+    @Test
+    public void findAllApproveduser(){
+        List<ApprovedUser> approvedUsers = approveduserDao.findAllApproveduser();
+        Assert.assertTrue(!approvedUsers.isEmpty());
     }
 }

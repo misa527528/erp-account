@@ -13,6 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -59,5 +62,13 @@ public class ApprovedUserManagerImplTest {
         doReturn(approvedUser).when(approveduserDao).findApproveduserById(anyString());
         ApprovedUser approvedUser = approvedUserManager.findApproveduserById("111");
         Assert.assertEquals("hello",approvedUser.getName());
+    }
+
+    @Test
+    public void findAllApproveduser(){
+        List<ApprovedUser> list = new LinkedList<>();
+        doReturn(list).when(approveduserDao).findAllApproveduser();
+        List<ApprovedUser> approvedUsers = approvedUserManager.findAllApproveduser();
+        Assert.assertEquals(list, approvedUsers);
     }
 }
