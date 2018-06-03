@@ -7,4 +7,6 @@ public interface ApproveduserDao {
 	ApprovedUser findApproveduserById(String userId);
 
 	int updateApproveduser(Register register);
+
+	int addApproveduser(Register register);
 }
