@@ -10,6 +10,7 @@ import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
 import cn.edu.cqupt.erp.erpaccount.service.LoginUserService;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,11 @@ public class LoginUserServiceImpl implements LoginUserService {
     public String loginUser(String userId, String password, String status) {
         Map map;
         String loginSuccess;
+        if (!StringUtils.isNotBlank(userId) || !StringUtils.isNotBlank(password) || !StringUtils.isNotBlank(status)){
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+            loginSuccess = JSON.toJSONString(map);
+            return loginSuccess;
+        }
         if ("student".equals(status)) {
             Register register = registerManager.findRegisterByUserId(userId);
             if (register != null){
