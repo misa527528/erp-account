@@ -40,20 +40,16 @@ public class LoginUserServiceImpl implements LoginUserService {
         }
         if ("student".equals(status)) {
             Register register = registerManager.findRegisterByUserId(userId);
-            if (register != null){
-                if (password.equals(register.getPassword())){
+            if (register != null && password.equals(register.getPassword())){
                     map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
                     loginSuccess = JSON.toJSONString(map);
                     return loginSuccess;
-                }
             }
             ApprovedUser approvedUser = approvedUserManager.findApproveduserById(userId);
-            if (approvedUser != null){
-                if (password.equals(approvedUser.getPassword())){
+            if (approvedUser != null && password.equals(approvedUser.getPassword())){
                     map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
                     loginSuccess = JSON.toJSONString(map);
                     return loginSuccess;
-                }
             }
             map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
             loginSuccess = JSON.toJSONString(map);
@@ -61,12 +57,10 @@ public class LoginUserServiceImpl implements LoginUserService {
         }
         if ("teacher".equals(status)){
             AdminUser adminUser = adminUserManager.findAdminuserByAdminID(userId);
-            if (adminUser != null){
-                if (password.equals(adminUser.getPassword())){
+            if (adminUser != null && password.equals(adminUser.getPassword())){
                     map = MapUtil.toMap(true, UserOperateConstant.SUCCESS_FLAG,null);
                     loginSuccess = JSON.toJSONString(map);
                     return loginSuccess;
-                }
             }
             map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
             loginSuccess = JSON.toJSONString(map);
