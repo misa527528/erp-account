@@ -34,11 +34,11 @@ public class LoginUserServiceImpl implements LoginUserService {
         Map map;
         String loginResult;
         if (!StringUtils.isNotBlank(userId) || !StringUtils.isNotBlank(password) || !StringUtils.isNotBlank(status)){
-            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,UserOperateConstant.PARAM_ERROR);
             loginResult = JSON.toJSONString(map);
             return loginResult;
         }
-        if ("student".equals(status)) {
+        if (UserOperateConstant.STUDENT_STATUS.equals(status)) {
             Register register = registerManager.findRegisterByUserId(userId);
             if (register != null && password.equals(register.getPassword())){
                     map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
@@ -51,22 +51,22 @@ public class LoginUserServiceImpl implements LoginUserService {
                     loginResult = JSON.toJSONString(map);
                     return loginResult;
             }
-            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,UserOperateConstant.USER_NOT_EXIT);
             loginResult = JSON.toJSONString(map);
             return loginResult;
         }
-        if ("teacher".equals(status)){
+        if (UserOperateConstant.TEACHER_STATUS.equals(status)){
             AdminUser adminUser = adminUserManager.findAdminuserByAdminID(userId);
             if (adminUser != null && password.equals(adminUser.getPassword())){
                     map = MapUtil.toMap(true, UserOperateConstant.SUCCESS_FLAG,null);
                     loginResult = JSON.toJSONString(map);
                     return loginResult;
             }
-            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,UserOperateConstant.PASSWORD_ERROR);
             loginResult = JSON.toJSONString(map);
             return loginResult;
         }
-        map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+        map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,UserOperateConstant.USER_NOT_EXIT);
         loginResult = JSON.toJSONString(map);
         return loginResult;
     }
