@@ -9,10 +9,10 @@ public interface RegisterDao {
 
     int  updateRegister(Register register);
 
-    Register findByUserId(String registerId);
+    Register findRegisterByUserId(String userID);
 
     List<Register> findAllRegister();
 
-    int deleteRegisterById(String registerId);
+    int deleteRegisterById(String userID);
 
 }
