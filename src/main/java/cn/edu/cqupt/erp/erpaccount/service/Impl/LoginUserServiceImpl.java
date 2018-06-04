@@ -1,0 +1,71 @@
+package cn.edu.cqupt.erp.erpaccount.service.Impl;
+
+import cn.edu.cqupt.erp.erpaccount.constant.UserOperateConstant;
+import cn.edu.cqupt.erp.erpaccount.entity.AdminUser;
+import cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser;
+import cn.edu.cqupt.erp.erpaccount.entity.Register;
+import cn.edu.cqupt.erp.erpaccount.manager.AdminUserManager;
+import cn.edu.cqupt.erp.erpaccount.manager.ApprovedUserManager;
+import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
+import cn.edu.cqupt.erp.erpaccount.service.LoginUserService;
+import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
+import com.alibaba.fastjson.JSON;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/login")
+public class LoginUserServiceImpl implements LoginUserService {
+    @Resource
+    private RegisterManager registerManager;
+    @Resource
+    private ApprovedUserManager approvedUserManager;
+    @Resource
+    private AdminUserManager adminUserManager;
+
+    @Override
+    @RequestMapping(value = "/loginUser", method = RequestMethod.GET)
+    public String loginUser(String userId, String password, String status) {
+        Map map;
+        String loginSuccess;
+        if ("student".equals(status)) {
+            Register register = registerManager.findRegisterByUserId(userId);
+            if (register != null){
+                if (password.equals(register.getPassword())){
+                    map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
+                    loginSuccess = JSON.toJSONString(map);
+                    return loginSuccess;
+                }
+            }
+            ApprovedUser approvedUser = approvedUserManager.findApproveduserById(userId);
+            if (approvedUser != null){
+                if (password.equals(approvedUser.getPassword())){
+                    map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
+                    loginSuccess = JSON.toJSONString(map);
+                    return loginSuccess;
+                }
+            }
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+            loginSuccess = JSON.toJSONString(map);
+            return loginSuccess;
+        }
+        if ("teacher".equals(status)){
+            AdminUser adminUser = adminUserManager.findAdminuserByAdminID(userId);
+            if (adminUser != null){
+                if (password.equals(adminUser.getPassword())){
+                    map = MapUtil.toMap(true, UserOperateConstant.SUCCESS_FLAG,null);
+                    loginSuccess = JSON.toJSONString(map);
+                    return loginSuccess;
+                }
+            }
+            map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
+            loginSuccess = JSON.toJSONString(map);
+            return loginSuccess;
+        }
+        return null;
+    }
+}
