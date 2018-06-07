@@ -20,4 +20,8 @@
         SELECT <include refid="Base_Column_List"/>
         FROM adminuser
     </select>
+
+    <select id="findAdminuserByAdminID" parameterType="map" resultType="cn.edu.cqupt.erp.erpaccount.entity.AdminUser">
+        select <include refid="Base_Column_List"/> from ADMINUSER where ADMINID = #{adminId}
+    </select>
 </mapper>

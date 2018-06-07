@@ -1,5 +1,6 @@
 package cn.edu.cqupt.erp.erpaccount.dao;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,12 @@ public class AdminUserDaoTest {
 		List<AdminUser> result = adminUserDao.getAll();
 
 		assertTrue(!result.isEmpty());
+	}
+
+	@Test
+	public void findAdminuserByAdminID(){
+		AdminUser adminUser = adminUserDao.findAdminuserByAdminID("0101311");
+		String name = adminUser.getAdminName();
+		Assert.assertEquals("王永",name);
 	}
 }
