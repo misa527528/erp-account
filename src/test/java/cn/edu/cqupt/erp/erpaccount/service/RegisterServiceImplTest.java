@@ -3,6 +3,7 @@ package cn.edu.cqupt.erp.erpaccount.service;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import cn.edu.cqupt.erp.erpaccount.manager.ApprovedUserManager;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
+import cn.edu.cqupt.erp.erpaccount.mq.Sender;
 import cn.edu.cqupt.erp.erpaccount.service.Impl.RegisterServiceImpl;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
 import com.alibaba.fastjson.JSON;
@@ -17,7 +18,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Map;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -26,6 +30,8 @@ public class RegisterServiceImplTest {
     private RegisterManager registerManager;
     @Mock
     private ApprovedUserManager approvedUserManager;
+    @Mock
+    private Sender messageSender;
 
     @InjectMocks
     private RegisterService registerService = new RegisterServiceImpl();
@@ -48,6 +54,7 @@ public class RegisterServiceImplTest {
     public void addRegister(){
         Map map;
         doReturn(true).when(registerManager).addRegister(anyObject());
+        doNothing().when(messageSender).send(any());
         String result = registerService.addRegister(register);
         map = MapUtil.toMap(true,"success",null);
         String mapStr = JSON.toJSONString(map);

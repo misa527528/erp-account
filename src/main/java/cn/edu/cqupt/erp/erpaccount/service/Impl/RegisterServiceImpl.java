@@ -5,6 +5,7 @@ import cn.edu.cqupt.erp.erpaccount.entity.ApprovedUser;
 import cn.edu.cqupt.erp.erpaccount.entity.Register;
 import cn.edu.cqupt.erp.erpaccount.manager.ApprovedUserManager;
 import cn.edu.cqupt.erp.erpaccount.manager.RegisterManager;
+import cn.edu.cqupt.erp.erpaccount.mq.Sender;
 import cn.edu.cqupt.erp.erpaccount.service.RegisterService;
 import cn.edu.cqupt.erp.erpaccount.util.MapUtil;
 import com.alibaba.fastjson.JSON;
@@ -25,6 +26,8 @@ public class RegisterServiceImpl implements RegisterService{
     private RegisterManager registerManager;
     @Resource
     private ApprovedUserManager approvedUserManager;
+    @Resource
+    private Sender messageSender;
 
     @Override
     @RequestMapping(value = "/addRegister", method = RequestMethod.POST)
@@ -36,6 +39,7 @@ public class RegisterServiceImpl implements RegisterService{
         boolean addSuccess = registerManager.addRegister(register);
         Map map;
         if (addSuccess){
+            messageSender.send(register);
             map = MapUtil.toMap(true,UserOperateConstant.SUCCESS_FLAG,null);
         }else {
             map = MapUtil.toMap(false,UserOperateConstant.FAIL_FLAG,null);
